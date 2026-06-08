@@ -83,7 +83,7 @@ def home():
             "category": r[2],
             "description": r[3],
             "amount": r[4]
-        )
+        }  # <-- Yahan } hona chahiye
         for r in rows
     ]
 
