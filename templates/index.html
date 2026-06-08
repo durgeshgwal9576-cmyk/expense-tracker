@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <div class="dashboard">
+
+    <div class="card">
+        <h3>Total Expenses</h3>
+        <p>{{ expenses|length }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Spending</h3>
+        <p>₹{{ total }}</p>
+    </div>
+
+</div>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💰 Expense Tracker</h1>
+
+    <form method="POST">
+
+        <input type="date" name="date" required>
+
+        <input type="text"
+               name="category"
+               placeholder="Category"
+               required>
+
+        <input type="text"
+               name="description"
+               placeholder="Description"
+               required>
+
+        <input type="number"
+               step="0.01"
+               name="amount"
+               placeholder="Amount"
+               required>
+
+        <button type="submit">
+            Add Expense
+        </button>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Delete</th>
+        </tr>
+
+        {% for expense in expenses %}
+
+        <tr>
+
+            <td>{{ expense.date }}</td>
+
+            <td>{{ expense.category }}</td>
+
+            <td>{{ expense.description }}</td>
+
+            <td>₹{{ expense.amount }}</td>
+
+            <td>
+                <a class="delete-btn" href="/delete/{{ loop.index0 }}">
+    Delete
+</a>
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <div class="total">
+    Total Spending : ₹{{ total }}
+</div>
+
+</div>
+
+</body>
+</html>
